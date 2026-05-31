@@ -81,6 +81,14 @@ class ReLURelaxation:
 
     name = "relu"
 
+    @staticmethod
+    def relu(x: Array | float) -> Array | float:
+        x_arr = np.asarray(x, dtype=float)
+        out = np.maximum(x_arr, 0.0)
+        if np.isscalar(x):
+            return float(out)
+        return out
+
     def relax(self, lower: Array, upper: Array) -> Tuple[Array, Array, Array, Array]:
         l = np.asarray(lower, dtype=float)
         u = np.asarray(upper, dtype=float)
@@ -346,7 +354,7 @@ class FullyConnectedNetwork:
         for W, b, act in zip(self.weights, self.biases, self.activations):
             s = W @ f + b
             if act == "relu":
-                f = np.maximum(s, 0.0)
+                f = ReLURelaxation.relu(s)
             elif act == "sigmoid":
                 f = SigmoidRelaxation.sigma(s)
             elif act == "linear":
@@ -707,7 +715,7 @@ def _self_test_relaxations() -> None:
     """Basic sanity checks that sampled points satisfy the relaxations."""
     rng = np.random.default_rng(0)
     for relaxation, fn in [
-        (ReLURelaxation(), lambda z: np.maximum(z, 0.0)),
+        (ReLURelaxation(), ReLURelaxation.relu),
         (SigmoidRelaxation(), SigmoidRelaxation.sigma),
     ]:
         for _ in range(200):
