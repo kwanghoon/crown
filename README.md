@@ -40,6 +40,38 @@ python -c "import lirpa_forward_backward_fc as d; d._self_test_relaxations(); d.
 - 각 입력점별 `certified=True/False`를 비교
 - forward/backward 결과가 어떻게 달라지는지 함께 확인
 
+## Iterative Backward-only 실행 가이드
+
+반복(iteration) 방식 backward-only 구현은 아래 파일에 있습니다.
+
+- `lirpa_backward_only_iteration.py`
+
+### 1) 기본 실행
+
+```bash
+python lirpa_backward_only_iteration.py
+```
+
+기본 실행 시 다음을 수행합니다.
+
+- recursive backward-only와 iterative backward-only 결과 자동 비교
+- iterative backward-only XOR 데모 실행
+
+### 2) 비교 테스트만 실행
+
+```bash
+python -c "import lirpa_backward_only_iteration as it; it.compare_recursive_and_iterative(eps=0.02)"
+```
+
+### 3) 계층별 디버그 출력 모드
+
+아래처럼 `debug=True`로 실행하면 layer별 pre-activation bound와
+relaxation 파라미터(`alpha/beta`)가 출력됩니다.
+
+```bash
+python -c "import lirpa_backward_only_iteration as it; it.run_xor_demo_iterative(eps=0.02, debug=True)"
+```
+
 ## MATLAB 실행 가이드
 
 MATLAB 버전은 아래 파일에 있습니다.
