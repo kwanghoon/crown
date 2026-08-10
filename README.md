@@ -92,6 +92,8 @@ C++ 버전은 아래 파일에 있습니다.
 
 - `lirpa_forward_backward_fc.cpp` (`std::vector` 기반 구현)
 - `lirpa_forward_backward_fc_array.cpp` (배열 기반 구현)
+- `lirpa_backward_only_iteration.cpp` (iterative backward-only, `std::vector` 기반 구현)
+- `lirpa_backward_only_iteration_array.cpp` (iterative backward-only, 배열 기반 구현)
 
 ### 1) 빌드
 
@@ -100,6 +102,17 @@ Windows PowerShell + g++(MinGW 등) 기준:
 ```powershell
 g++ -std=c++17 -O2 lirpa_forward_backward_fc.cpp -o lirpa_forward_backward_fc.exe
 g++ -std=c++17 -O2 lirpa_forward_backward_fc_array.cpp -o lirpa_forward_backward_fc_array.exe
+g++ -std=c++17 -O2 lirpa_backward_only_iteration.cpp -o lirpa_backward_only_iteration.exe
+g++ -std=c++17 -O2 lirpa_backward_only_iteration_array.cpp -o lirpa_backward_only_iteration_array.exe
+```
+
+WSL Ubuntu + clang++ 기준:
+
+```powershell
+wsl clang++ -std=c++17 -O2 /mnt/d/Work/lang/python/crown/lirpa_forward_backward_fc.cpp -o /mnt/d/Work/lang/python/crown/lirpa_forward_backward_fc_wsl
+wsl clang++ -std=c++17 -O2 /mnt/d/Work/lang/python/crown/lirpa_forward_backward_fc_array.cpp -o /mnt/d/Work/lang/python/crown/lirpa_forward_backward_fc_array_wsl
+wsl clang++ -std=c++17 -O2 /mnt/d/Work/lang/python/crown/lirpa_backward_only_iteration.cpp -o /mnt/d/Work/lang/python/crown/lirpa_backward_only_iteration_wsl
+wsl clang++ -std=c++17 -O2 /mnt/d/Work/lang/python/crown/lirpa_backward_only_iteration_array.cpp -o /mnt/d/Work/lang/python/crown/lirpa_backward_only_iteration_array_wsl
 ```
 
 ### 2) 기본 실행 (eps=0.02)
@@ -107,6 +120,17 @@ g++ -std=c++17 -O2 lirpa_forward_backward_fc_array.cpp -o lirpa_forward_backward
 ```powershell
 ./lirpa_forward_backward_fc.exe
 ./lirpa_forward_backward_fc_array.exe
+./lirpa_backward_only_iteration.exe
+./lirpa_backward_only_iteration_array.exe
+```
+
+WSL Ubuntu 바이너리 실행:
+
+```powershell
+wsl /mnt/d/Work/lang/python/crown/lirpa_forward_backward_fc_wsl
+wsl /mnt/d/Work/lang/python/crown/lirpa_forward_backward_fc_array_wsl
+wsl /mnt/d/Work/lang/python/crown/lirpa_backward_only_iteration_wsl
+wsl /mnt/d/Work/lang/python/crown/lirpa_backward_only_iteration_array_wsl
 ```
 
 ### 3) epsilon을 바꿔 실행하기
@@ -118,6 +142,17 @@ g++ -std=c++17 -O2 lirpa_forward_backward_fc_array.cpp -o lirpa_forward_backward
 ./lirpa_forward_backward_fc.exe 0.23
 ./lirpa_forward_backward_fc_array.exe 0.22
 ./lirpa_forward_backward_fc_array.exe 0.23
+./lirpa_backward_only_iteration.exe 0.02 --debug
+./lirpa_backward_only_iteration_array.exe 0.02 --debug
+```
+
+WSL Ubuntu 바이너리에서 epsilon/debug 옵션 사용 예시:
+
+```powershell
+wsl /mnt/d/Work/lang/python/crown/lirpa_forward_backward_fc_wsl 0.22
+wsl /mnt/d/Work/lang/python/crown/lirpa_forward_backward_fc_array_wsl 0.23
+wsl /mnt/d/Work/lang/python/crown/lirpa_backward_only_iteration_wsl 0.02 --debug
+wsl /mnt/d/Work/lang/python/crown/lirpa_backward_only_iteration_array_wsl 0.02 --debug
 ```
 
 권장 실험:
