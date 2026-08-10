@@ -1,4 +1,4 @@
-# LiRPA XOR Demo (Python/MATLAB)
+# LiRPA XOR Demo (Python/CPP/MATLAB)
 
 이 저장소는 완전연결 신경망(은닉층 ReLU, 출력층 Sigmoid)에 대해 LiRPA(CROWN 계열) forward/backward bound를 계산하는 교육용 예제를 제공합니다.
 
@@ -71,20 +71,6 @@ relaxation 파라미터(`alpha/beta`)가 출력됩니다.
 ```bash
 python -c "import lirpa_backward_only_iteration as it; it.run_xor_demo_iterative(eps=0.02, debug=True)"
 ```
-
-## MATLAB 실행 가이드
-
-MATLAB 버전은 아래 파일에 있습니다.
-
-- `lirpa_forward_backward_fc.m`
-
-MATLAB 콘솔에서 실행:
-
-```matlab
-lirpa_forward_backward_fc_matlab
-```
-
-MATLAB 코드 내부의 `run_xor_demo(...)` 인자를 바꿔 epsilon 실험을 반복하면 동일한 경향을 확인할 수 있습니다.
 
 ## C++ 실행 가이드
 
@@ -168,5 +154,20 @@ wsl /mnt/d/Work/lang/python/crown/lirpa_backward_only_iteration_array_wsl 0.02 -
 - 네트워크 점 예측값 (`network_output`)
 - forward bound와 backward bound의 하한/상한
 - XOR 정답 클래스 기준으로 인증 여부 (`certified=True/False`)
+
+
+## MATLAB 실행 가이드
+
+MATLAB 버전은 아래 파일에 있습니다.
+
+- `lirpa_forward_backward_fc.m`
+
+MATLAB 콘솔에서 실행:
+
+```matlab
+lirpa_forward_backward_fc_matlab
+```
+
+MATLAB 코드 내부의 `run_xor_demo(...)` 인자를 바꿔 epsilon 실험을 반복하면 동일한 경향을 확인할 수 있습니다.
 
 XOR 정답이 1인 점은 보통 `lower bound > 0.5`, 정답이 0인 점은 `upper bound < 0.5` 조건으로 인증 여부를 판단합니다.
